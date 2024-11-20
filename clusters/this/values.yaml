@@ -5,13 +5,13 @@ default:
     autoSyncPrune: false
     project: cluster-config
     labels:
-      app-source: group-non-prod
+      app-source: cluster-non-prod-west
       repo: cluster-config
     destination:
       namespace: openshift-gitops
       server: https://kubernetes.default.svc
     source:
-      repoURL: https://github.com/raffaelespazzoli/gitops-std-repo.git
+      repoURL: https://github.com/redhat-cop/gitops-catalog.git
       targetRevision: HEAD
     syncOptions:
     - ApplyOutOfSyncOnly=true
@@ -21,14 +21,3 @@ default:
     - FailOnSharedResource=true
     - RespectIgnoreDifferences=true
     - CreateNamespace=false      
-
-applications:
-
-  vault-config-operator:
-    annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: '5'
-    destination:
-      namespace: cert-manager
-    source:
-      path: groups/non-prod/overlays/vault-config-operator

@@ -11,7 +11,7 @@ default:
       namespace: openshift-gitops
       server: https://kubernetes.default.svc
     source:
-      repoURL: https://github.com/raffaelespazzoli/gitops-std-repo.git
+      repoURL: https://github.com/redhat-cop/gitops-catalog.git
       targetRevision: HEAD
     syncOptions:
     - ApplyOutOfSyncOnly=true
@@ -49,4 +49,12 @@ applications:
     destination:
       namespace: cert-manager
     source:
-      path: components/cert-manager-operator
+      path: openshift-cert-manager-operator/operator/overlays/stable-v1
+
+  advanced-cluster-management:
+    source:
+      path: advanced-cluster-management/operator/overlays/release-2.12
+
+  rhsso-operator:
+    source:
+      path: rhsso/operator/overlays/stable
